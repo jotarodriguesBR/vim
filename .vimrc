@@ -10,12 +10,22 @@ Plug 'tpope/vim-fugitive'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'wolandark/vim-live-server'
+Plug 'jiangmiao/auto-pairs'
 call plug#end()
 
+" Add `:Format` command to format current buffer
+command! -nargs=0 Format :call CocActionAsync('format')
+" Add `:Fold` command to fold current buffer
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" Add `:OR` command for organize imports of the current buffer
+command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.organizeImport')
 
 
-" set bg 
-set background=dark
+
+
+
 " colorscheme
 colorscheme Tomorrow-Night-Bright
 " coc nvim tab binds
@@ -23,7 +33,6 @@ inoremap <expr> <Tab> coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"
 inoremap <expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<S-Tab>"
 " Ntree binds
 nnoremap <C-n> :NERDTreeFocus<CR>
-
 " tabs on vim
 nmap <C-E> :tabclose<CR>
 nmap <C-T> :tabnew<CR>
@@ -35,12 +44,14 @@ nmap <C-W> :write!<CR>
 nmap <C-Q> :quit!<CR>
 
 " fzf 
-nmap <C-F> :Files<CR>
-nmap <C-C> :Buffers<CR>
+nmap ff :FZF<CR> 
+nmap bb :Buffers<CR>
 
 " git fzf
-nmap <C-G> :Commits<CR>
+nmap gg :Commits<CR>
 
+" md preview
+nmap <C-S-P> :CocCommand markdown-preview-enhanced.openPreview<CR>
 " syntax highlight 
 syntax on
 " convert tab to spaces 
@@ -50,8 +61,7 @@ set autoindent
 " filetype indent 
 set filetype=on
 " insert number of spaces when the tab key is pressed
-set smarttab
-set tabstop=4 
+set tabstop=3 
 " enable search highligting and more tips
 set hlsearch
 set ignorecase
@@ -67,13 +77,14 @@ set mouse=a
 set title
 " use colors that suit a dark background
 set background=dark
-" automatically re-read files if unmodified inside vim
-set autoread
 " enable utf-8 
-set encoding=UTF-8
-" remove (~)
+" remove  (~)
 set fillchars=vert:\│,eob:\ 
-" remove bloatware on vim-airline
+
+" Add (Neo)Vim's native statusline support
+" NOTE: Please see `:h coc-status` for integrations with external plugins that
+" provide custom statusline: lightline.vim, vim-airline
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 au User AirlineAfterInit :let g:airline_section_z = airline#section#create(['%4p%% %L:%3v'])
 
 " set theme for status bar
