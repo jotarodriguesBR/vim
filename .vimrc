@@ -1,8 +1,8 @@
 call plug#begin()
+Plug 'ghifarit53/tokyonight-vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'preservim/nerdtree' 
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'ryanoasis/vim-devicons'
 Plug 'tpope/vim-fugitive'
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -14,11 +14,8 @@ Plug 'stsewd/fzf-checkout.vim'
 Plug 'https://github.com/wolandark/vim-live-server'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'prabirshrestha/vim-lsp'
-Plug 'honza/vim-snippets'
-Plug 'nordtheme/vim'
-Plug 'elixir-editors/vim-elixir'
+Plug 'OmniSharp/omnisharp-vim'
 call plug#end()
-
 
 
 " Add `:Format` command to format current buffer
@@ -46,9 +43,7 @@ function! s:check_back_space() abort
 endfunction
 
 " colorscheme
-colorscheme nord 
 set termguicolors
-
 " live server 
 nmap e3 :StartLiveServer<CR>
 
@@ -115,5 +110,13 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 au User AirlineAfterInit :let g:airline_section_z = airline#section#create(['%4p%% %L:%3v'])
 let g:airline#extensions#whitespace#enabled = 0
 " set theme for status bar
-let g:airline_theme='nord'
+let g:airline_theme='tokyonight'
 vnoremap <silent><Leader>y "yy <Bar> :call system('xclip', @y)<CR>
+filetype indent plugin on
+syntax enable
+set termguicolors
+
+let g:tokyonight_style = 'night' " available: night, storm
+let g:tokyonight_enable_italic = 1
+
+colorscheme tokyonight

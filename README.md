@@ -2,7 +2,7 @@
 
 <b> <center> Hi, this is my vim configuration: </b> </center>
 
-![EXAMPLE](assets/example.png)
+![EXAMPLE](assets/preview.png)
 
 > How to install? 
 
